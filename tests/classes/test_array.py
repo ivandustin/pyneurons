@@ -1,6 +1,6 @@
 from jax.tree_util import tree_map
 from jax.numpy import array
-from pyneurons.classes.array import Array
+from pyneurons.classes import Array
 
 
 def test():
