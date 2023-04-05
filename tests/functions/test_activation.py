@@ -11,18 +11,21 @@ def input():
     return array([nan, -inf, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, inf])
 
 
+@fixture
+def gradient(input):
+    return ones_like(input)
+
+
 def test(input):
     assert array_equal(activation(input), activation_function(input))
 
 
-def test_grad_activation(input):
-    assert array_equal(grad(partial(loss, activation))(input), ones_like(input))
+def test_grad_activation(input, gradient):
+    assert array_equal(grad(partial(loss, activation))(input), gradient)
 
 
-def test_grad_activation_function(input):
-    assert not array_equal(
-        grad(partial(loss, activation_function))(input), ones_like(input)
-    )
+def test_grad_activation_function(input, gradient):
+    assert not array_equal(grad(partial(loss, activation_function))(input), gradient)
 
 
 def loss(function, input):
