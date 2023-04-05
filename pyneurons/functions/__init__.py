@@ -1,5 +1,5 @@
+from .activation import activation
 from .synapse import synapse
-from .spike import spike
 from .mse import mse
 
-__all__ = ["synapse", "spike", "mse"]
+__all__ = ["activation", "synapse", "mse"]

@@ -1,9 +1,9 @@
 from jax.numpy import array, array_equal, inf, nan
-from pyneurons.functions.core import spike
+from pyneurons.functions.core import activation
 
 
 def test():
     input = array([nan, -inf, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, inf])
     expected = array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.5, 2.0, 2.0, 2.0, 2.0])
-    actual = spike(input)
+    actual = activation(input)
     assert array_equal(actual, expected)

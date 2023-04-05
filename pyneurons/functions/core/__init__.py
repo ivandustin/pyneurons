@@ -1,3 +1,3 @@
-from .spike import spike
+from .activation import activation
 
-__all__ = ["spike"]
+__all__ = ["activation"]

@@ -1,5 +1,5 @@
 from jax.numpy import where, minimum
 
 
-def spike(x):
+def activation(x):
     return where(x >= 1, minimum(x, 2), 0)
