@@ -1,19 +1,25 @@
-from jax.tree_util import tree_map
+from pytest import fixture
 from jax.numpy import array
 from pyneurons.classes import Array
 
 
-def test():
-    a = Array(array(1.0))
-    b = tree_map(lambda x: x + 1, a)
-    assert b.array == 2.0
+@fixture
+def ndarray():
+    return array(1.0)
 
 
-def test_str():
-    a = Array(0)
-    assert str(a) == "Array(0)"
+@fixture
+def instance(ndarray):
+    return Array(ndarray)
 
 
-def test_repr():
-    a = Array(0)
-    assert repr(a) == str(a)
+def test(instance, ndarray):
+    assert instance.array == ndarray
+
+
+def test_str(instance, ndarray):
+    assert str(instance) == f"Array({ndarray})"
+
+
+def test_repr(instance):
+    assert repr(instance) == str(instance)

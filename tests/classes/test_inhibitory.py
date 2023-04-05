@@ -1,7 +1,7 @@
 from pytest import fixture
 from jax.numpy import array, array_equal, negative
-from pyneurons.functions import apply
 from pyneurons.classes import Inhibitory
+from pyneurons.functions import apply
 
 
 @fixture
