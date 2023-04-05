@@ -1,7 +1,7 @@
 from pytest import fixture
-from jax.numpy import array, array_equal, negative
+from jax.numpy import array, array_equal
+from pyneurons.functions.apply import negative
 from pyneurons.classes import Inhibitory
-from pyneurons.functions import apply
 
 
 @fixture
@@ -15,9 +15,9 @@ def x():
 
 
 @fixture
-def y(neuron, x):
-    return negative(apply(neuron.array, x))
+def expected(neuron, x):
+    return negative(neuron.array, x)
 
 
-def test_call(neuron, x, y):
-    assert array_equal(neuron(x), y)
+def test_call(neuron, x, expected):
+    assert array_equal(neuron(x), expected)

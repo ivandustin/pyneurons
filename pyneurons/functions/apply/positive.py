@@ -1,6 +1,6 @@
 from jax.numpy import matmul
-from .activation import activation
+from pyneurons.functions import activation
 
 
-def apply(matrix, x):
+def positive(matrix, x):
     return activation(matmul(x, matrix))
