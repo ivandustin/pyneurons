@@ -4,19 +4,17 @@ from multipledispatch import dispatch
 
 
 @register_pytree_node_class
-class Array:
-    @dispatch(ndarray)
-    def __init__(self, array):
-        self.array = array
+class Array(tuple):
+    @dispatch(type, ndarray)
+    def __new__(cls, array):
+        return super().__new__(cls, (array,))
 
-    def __str__(self):
-        return f"Array({self.array})"
-
-    def __repr__(self):
-        return str(self)
+    @property
+    def array(self):
+        return self[0]
 
     def tree_flatten(self):
-        return (self.array,), None
+        return self, None
 
     @classmethod
     def tree_unflatten(cls, _, children):

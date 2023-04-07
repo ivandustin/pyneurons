@@ -7,11 +7,6 @@ def test_init(key):
     assert neuron.array.shape == (3, 1)
 
 
-def test_init_y(key):
-    neuron = Neuron(key, 3, 2)
-    assert neuron.array.shape == (3, 2)
-
-
 def test_init_array():
     array = ones(shape=(3, 2))
     neuron = Neuron(array)

@@ -15,11 +15,3 @@ def instance(ndarray):
 
 def test(instance, ndarray):
     assert instance.array == ndarray
-
-
-def test_str(instance, ndarray):
-    assert str(instance) == f"Array({ndarray})"
-
-
-def test_repr(instance):
-    assert repr(instance) == str(instance)
