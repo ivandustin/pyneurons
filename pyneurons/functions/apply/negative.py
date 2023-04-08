@@ -1,8 +1,9 @@
 from jax import jit
+from jax.numpy import matmul
 from jax.numpy import negative as negative_function
-from .positive import positive
+from pyneurons.functions import activation
 
 
 @jit
 def negative(matrix, x):
-    return negative_function(positive(matrix, x))
+    return negative_function(activation(matmul(x, matrix)))
