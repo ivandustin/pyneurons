@@ -3,4 +3,4 @@ from pyneurons.classes import Neuron
 
 
 def test(key):
-    assert stack([Neuron(key, 2)] * 2).array.shape == (2, 2, 1)
+    assert stack([Neuron(key, 2)] * 2)[0].shape == (2, 2, 1)

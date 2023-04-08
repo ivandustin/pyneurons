@@ -1,6 +1,5 @@
 from pytest import fixture
 from jax.numpy import float32, isclose
-from jax.random import PRNGKey
 from pyneurons.functions import synapses
 
 

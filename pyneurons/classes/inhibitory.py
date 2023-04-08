@@ -6,4 +6,4 @@ from .neuron import Neuron
 @register_pytree_node_class
 class Inhibitory(Neuron):
     def __call__(self, x):
-        return negative(self.array, x)
+        return negative(self[0], x)

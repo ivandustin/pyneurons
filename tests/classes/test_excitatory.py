@@ -16,7 +16,7 @@ def x():
 
 @fixture
 def expected(neuron, x):
-    return positive(neuron.array, x)
+    return positive(neuron[0], x)
 
 
 def test_call(neuron, x, expected):

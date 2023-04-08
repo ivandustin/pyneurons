@@ -6,4 +6,4 @@ from .neuron import Neuron
 @register_pytree_node_class
 class Excitatory(Neuron):
     def __call__(self, x):
-        return positive(self.array, x)
+        return positive(self[0], x)
