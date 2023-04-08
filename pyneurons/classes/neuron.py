@@ -1,7 +1,7 @@
 from jax.tree_util import register_pytree_node_class
 from jax.numpy import ndarray
 from multipledispatch import dispatch
-from pyneurons.functions import synapses
+from pyneurons.functions import synapses, randkey
 from .tuple import Tuple
 
 
@@ -14,3 +14,7 @@ class Neuron(Tuple):
     @dispatch(type, ndarray, int)
     def __new__(cls, key, x):
         return cls.__new__(cls, synapses(key, shape=(x, 1)))
+
+    @dispatch(type, int)
+    def __new__(cls, x):
+        return cls.__new__(cls, randkey(), x)
