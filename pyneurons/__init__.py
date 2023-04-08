@@ -1,6 +1,14 @@
-from .classes import Excitatory, Inhibitory
+from .classes import Inhibitory as inh
+from .classes import Excitatory as ex
 from .functions import concat, stack
 from . import functions
 from . import classes
 
-__all__ = ["Excitatory", "Inhibitory", "concat", "stack", "functions", "classes"]
+__all__ = [
+    "functions",
+    "classes",
+    "concat",
+    "stack",
+    "inh",
+    "ex",
+]
