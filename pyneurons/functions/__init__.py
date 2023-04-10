@@ -5,6 +5,7 @@ from .stack import stack
 from . import random
 from . import apply
 from . import core
+from . import vjps
 
 __all__ = [
     "activation",
@@ -14,4 +15,5 @@ __all__ = [
     "stack",
     "apply",
     "core",
+    "vjps",
 ]
