@@ -8,4 +8,4 @@ class Tuple(tuple):
 
     @classmethod
     def tree_unflatten(cls, _, children):
-        return cls(*children)
+        return cls(children)

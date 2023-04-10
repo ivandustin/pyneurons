@@ -1,3 +1,3 @@
-from .activation import activation
+from . import activations
 
-__all__ = ["activation"]
+__all__ = ["activations"]

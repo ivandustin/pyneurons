@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import array, array_equal, inf, nan
-from pyneurons.functions.core import activation
+from pyneurons.functions.core.activations import spike
 
 
 @fixture
@@ -14,4 +14,4 @@ def expected():
 
 
 def test(input, expected):
-    assert array_equal(activation(input), expected)
+    assert array_equal(spike(input), expected)

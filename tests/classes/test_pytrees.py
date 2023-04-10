@@ -1,17 +1,17 @@
 from pytest import fixture
 from jax.numpy import array
 from jax.tree_util import tree_map
-from pyneurons.classes import Neuron, Excitatory, Inhibitory
+from pyneurons.classes import Tuple, Neuron
 
 
 @fixture
-def ndarray():
-    return array(1.0)
+def value():
+    return tuple([array(1.0)] * 3)
 
 
-@fixture(params=[Neuron, Excitatory, Inhibitory])
-def instance(request, ndarray):
-    return request.param(ndarray)
+@fixture(params=[Tuple, Neuron])
+def instance(request, value):
+    return request.param(value)
 
 
 def test_tree_map(instance):

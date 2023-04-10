@@ -1,9 +1,9 @@
+import pyneurons as pn
+from pytest import fixture
 from jax.numpy import array, mean, square, isclose
 from jax.tree_util import tree_map
 from jax.lax import fori_loop
 from jax import grad
-from pytest import fixture
-import pyneurons as pn
 
 
 @fixture
@@ -18,7 +18,7 @@ def y():
 
 @fixture
 def neuron(key):
-    return pn.ex(key, 1)
+    return pn.neuron(key, 1)
 
 
 def test(neuron, x, y):
