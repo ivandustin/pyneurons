@@ -1,4 +1,4 @@
-from pyneurons.functions.factories.classes import compose
+from pyneurons.functions.factories.classes.pytrees import compose
 from pyneurons.functions.activations import binary
 from pyneurons.classes import Neuron
 
