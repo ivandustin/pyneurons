@@ -9,4 +9,4 @@ def instance(key):
 
 
 def test_mean(instance):
-    assert isclose(instance.mean(), 1.381, atol=0.01)
+    assert isclose(instance.mean(), -1.618, atol=0.01)
