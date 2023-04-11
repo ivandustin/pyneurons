@@ -3,7 +3,7 @@ from jax.tree_util import register_pytree_node_class
 from jax.numpy import ndarray
 from jax.random import split
 from pyneurons.functions.random import key as random_key
-from pyneurons.functions.random import params
+from pyneurons.functions.random import param
 from pyneurons.functions import apply
 from .tuple import Tuple
 
@@ -17,9 +17,9 @@ class Neuron(Tuple):
     @dispatch(type, ndarray, int)
     def __new__(cls, key, x):
         key_m, key_b, key_a = split(key, 3)
-        m = params(key_m, (x, 1))
-        b = params(key_b, (1,))
-        a = params(key_a, (1,))
+        m = param(key_m, (x, 1))
+        b = param(key_b, (1,))
+        a = param(key_a, (1,))
         return cls.__new__(cls, (m, b, a))
 
     @dispatch(type, int)

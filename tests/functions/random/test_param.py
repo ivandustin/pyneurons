@@ -1,11 +1,11 @@
 from pytest import fixture
 from jax.numpy import float32, isclose
-from pyneurons.functions.random import params
+from pyneurons.functions.random import param
 
 
 @fixture
 def instance(key):
-    return params(key, shape=(1000,))
+    return param(key, shape=(1000,))
 
 
 def test_dtype(instance):
@@ -17,7 +17,7 @@ def test_type(instance):
 
 
 def test_mean(instance):
-    assert isclose(instance.mean(), 1.5, atol=0.01)
+    assert isclose(instance.mean(), 0.0, atol=0.01)
 
 
 def test_std(instance):

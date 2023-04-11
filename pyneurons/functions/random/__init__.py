@@ -1,11 +1,11 @@
 from .integer import integer
-from .params import params
+from .param import param
 from .seed import seed
 from .key import key
 
 __all__ = [
     "integer",
-    "params",
+    "param",
     "seed",
     "key",
 ]
