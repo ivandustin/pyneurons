@@ -18,7 +18,7 @@ def y():
 
 @fixture
 def neuron(key):
-    return pn.neuron(key, 1)
+    return pn.Neuron(key, 1)
 
 
 def test(neuron, x, y):
