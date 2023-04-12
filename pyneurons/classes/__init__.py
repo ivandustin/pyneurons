@@ -1,5 +1,11 @@
+from .binary import Binary
+from .neuron import Neuron
 from .model import Model
 from .tuple import Tuple
-from . import models
 
-__all__ = ["Model", "Tuple", "models"]
+__all__ = [
+    "Binary",
+    "Neuron",
+    "Model",
+    "Tuple",
+]

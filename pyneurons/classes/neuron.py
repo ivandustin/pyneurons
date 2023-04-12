@@ -4,7 +4,7 @@ from jax.numpy import ndarray
 from jax.random import split
 from pyneurons.functions.random import key as random_key
 from pyneurons.functions.random import weight, bias
-from ..model import Model
+from .model import Model
 
 
 @register_pytree_node_class

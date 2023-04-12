@@ -1,4 +1,4 @@
-from pyneurons.classes.models import Neuron
+from pyneurons.classes import Neuron
 
 
 def test_with_key(key):
