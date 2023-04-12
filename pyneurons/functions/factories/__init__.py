@@ -1,3 +1,4 @@
-from . import classes
+from .compose import compose
+from . import models
 
-__all__ = ["classes"]
+__all__ = ["compose", "models"]

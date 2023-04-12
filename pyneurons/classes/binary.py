@@ -1,5 +1,5 @@
-from pyneurons.functions.factories.classes.pytrees import compose
+from pyneurons.functions.factories.models import subclass
 from pyneurons.functions.activations import binary
 from .neuron import Neuron
 
-Binary = compose("Binary", binary, Neuron)
+Binary = subclass("Binary", Neuron, binary)

@@ -1,4 +1,4 @@
-def compose(name, function, cls):
+def compose(name, cls, function):
     def __call__(self, x):
         return function(cls.__call__(self, x))
 
