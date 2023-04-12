@@ -9,11 +9,11 @@ __all__ = [
     "subclass",
     "classes",
     "explode",
+    "implode",
     "unstack",
     "Binary",
     "Neuron",
     "concat",
-    "implode",
     "split",
     "stack",
 ]
