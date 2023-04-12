@@ -3,6 +3,6 @@ from .explode import explode
 
 
 def split(pytree):
-    return list(
-        explode(lambda array: split_function(array, array.shape[-1], axis=-1), pytree)
+    return explode(
+        lambda array: split_function(array, array.shape[-1], axis=-1), pytree
     )
