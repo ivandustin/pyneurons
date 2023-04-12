@@ -11,7 +11,7 @@ def input():
 def test(input):
     arrays = split(input)
     assert len(arrays) == 2
-    for array in arrays:
-        assert array.shape == (3, 1)
+    assert arrays[0].shape == (3, 1)
+    assert arrays[1].shape == (3, 1)
     assert array_equal(arrays[0], input[:, 0:1])
     assert array_equal(arrays[1], input[:, 1:2])
