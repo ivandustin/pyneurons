@@ -1,10 +1,8 @@
 from jax.numpy import split as split_function
-from .map import map as map_function
+from .explode import explode
 
 
 def split(pytree):
     return list(
-        map_function(
-            lambda array: split_function(array, array.shape[-1], axis=-1), pytree
-        )
+        explode(lambda array: split_function(array, array.shape[-1], axis=-1), pytree)
     )

@@ -1,4 +1,4 @@
-from .functions.pytrees import map, implode, concat, stack, split, unstack
+from .functions.pytrees import explode, implode, concat, stack, split, unstack
 from .functions.factories.models import subclass
 from .classes import Neuron, Binary
 from . import functions
@@ -8,6 +8,7 @@ __all__ = [
     "functions",
     "subclass",
     "classes",
+    "explode",
     "unstack",
     "Binary",
     "Neuron",
@@ -15,5 +16,4 @@ __all__ = [
     "implode",
     "split",
     "stack",
-    "map",
 ]
