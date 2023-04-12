@@ -1,6 +1,6 @@
 from jax.numpy import stack as jnp_stack
-from jax.tree_util import tree_map
+from .pytrees import reduce
 
 
-def stack(sequence):
-    return tree_map(lambda *args: jnp_stack(args), *sequence)
+def stack(pytrees):
+    return reduce(jnp_stack, pytrees)

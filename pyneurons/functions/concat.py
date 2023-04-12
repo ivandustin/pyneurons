@@ -1,6 +1,7 @@
-from jax.tree_util import tree_map
+from functools import partial
 from jax.numpy import concatenate
+from .pytrees import reduce
 
 
-def concat(sequence):
-    return tree_map(lambda *args: concatenate(args, axis=-1), *sequence)
+def concat(pytrees):
+    return reduce(partial(concatenate, axis=-1), pytrees)
