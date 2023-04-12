@@ -1,5 +1,4 @@
-from .concat import concat
-from .stack import stack
+from .identity import identity
 from . import factories
 from . import pytrees
 from . import random
@@ -8,10 +7,9 @@ from . import vjps
 
 __all__ = [
     "factories",
+    "identity",
     "pytrees",
     "random",
-    "concat",
-    "stack",
     "core",
     "vjps",
 ]

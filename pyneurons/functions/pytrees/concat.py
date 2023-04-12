@@ -1,6 +1,6 @@
 from functools import partial
 from jax.numpy import concatenate
-from .pytrees import reduce
+from .reduce import reduce
 
 
 def concat(pytrees):

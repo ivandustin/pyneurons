@@ -1,5 +1,5 @@
 from jax.numpy import stack as jnp_stack
-from .pytrees import reduce
+from .reduce import reduce
 
 
 def stack(pytrees):
