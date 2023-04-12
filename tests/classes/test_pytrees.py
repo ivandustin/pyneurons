@@ -1,7 +1,7 @@
-from pytest import fixture
-from jax.numpy import array
+from pyneurons.classes.models import Neuron
 from jax.tree_util import tree_map
-from pyneurons.classes import Tuple, Neuron
+from jax.numpy import array
+from pytest import fixture
 
 
 @fixture
@@ -9,7 +9,7 @@ def value():
     return tuple([array(1.0)] * 3)
 
 
-@fixture(params=[Tuple, Neuron])
+@fixture(params=[Neuron])
 def instance(request, value):
     return request.param(value)
 

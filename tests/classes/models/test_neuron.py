@@ -1,5 +1,4 @@
-from pytest import fixture
-from pyneurons.classes import Neuron
+from pyneurons.classes.models import Neuron
 
 
 def test_with_key(key):

@@ -1,5 +1,5 @@
-from .neuron import Neuron
+from .model import Model
 from .tuple import Tuple
-from . import neurons
+from . import models
 
-__all__ = ["Neuron", "Tuple", "neurons"]
+__all__ = ["Model", "Tuple", "models"]

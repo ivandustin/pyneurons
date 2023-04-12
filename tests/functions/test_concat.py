@@ -1,5 +1,5 @@
+from pyneurons.classes.models import Neuron
 from pyneurons.functions import concat
-from pyneurons.classes import Neuron
 
 
 def test(key):

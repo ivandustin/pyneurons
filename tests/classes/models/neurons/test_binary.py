@@ -1,4 +1,4 @@
-from pyneurons.classes.neurons import Binary
+from pyneurons.classes.models.neurons import Binary
 from jax.numpy import array
 
 
