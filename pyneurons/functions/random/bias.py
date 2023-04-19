@@ -1,5 +1,6 @@
-from .param import param
+from jax.numpy import negative
+from .weight import weight
 
 
-def bias(key, shape):
-    return param(key, shape) - 1.61803398875
+def bias(*args, **kwargs):
+    return negative(weight(*args, **kwargs))

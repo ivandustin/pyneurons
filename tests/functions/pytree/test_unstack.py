@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import array, array_equal
-from pyneurons.functions.pytrees import unstack
+from pyneurons.functions.pytree import unstack
 
 
 @fixture

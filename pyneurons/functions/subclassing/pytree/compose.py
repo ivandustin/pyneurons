@@ -1,5 +1,5 @@
 from jax.tree_util import register_pytree_node_class
-from pyneurons.functions.factories import compose as compose_function
+from pyneurons.functions.subclassing import compose as compose_function
 
 
 def compose(*args, **kwargs):

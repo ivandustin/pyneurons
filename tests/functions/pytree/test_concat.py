@@ -1,4 +1,4 @@
-from pyneurons.functions.pytrees import concat
+from pyneurons.functions.pytree import concat
 from pyneurons.classes import Neuron
 
 

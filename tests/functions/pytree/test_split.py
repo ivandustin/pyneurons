@@ -1,5 +1,5 @@
 from pytest import fixture
-from pyneurons.functions.pytrees import split
+from pyneurons.functions.pytree import split
 from jax.numpy import array, array_equal
 
 

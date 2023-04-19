@@ -1,10 +1,40 @@
-import pyneurons as pn
 from pytest import fixture
-from jax.numpy import array, mean, square, array_equal
-from jax.tree_util import tree_map
+from multipledispatch import dispatch
+from pyneurons.classes import Model, Neuron
+from pyneurons.functions.vjps import identity
+from pyneurons.functions.pytree import concat
+from pyneurons.functions.subclassing.pytree import compose
+from jax.numpy import array, mean, square, array_equal, heaviside, ndarray
+from jax.tree_util import tree_map, register_pytree_node_class
 from jax.lax import fori_loop
 from jax.random import split
 from jax import grad
+
+
+@identity
+def binary(x):
+    return heaviside(x, 1)
+
+
+Binary = compose("Binary", Neuron, binary)
+
+
+@register_pytree_node_class
+class XOR(Model):
+    @dispatch(type, tuple)
+    def __new__(cls, value):
+        return super(Model, cls).__new__(cls, value)
+
+    @dispatch(type, ndarray)
+    def __new__(cls, key):
+        key_a, key_b = split(key, 2)
+        a = Binary(key_a, 2)
+        b = Binary(key_b, 3)
+        return cls.__new__(cls, (a, b))
+
+    def __call__(self, x):
+        a, b = self
+        return b(concat([x, a(x)]))
 
 
 @fixture
@@ -19,25 +49,17 @@ def y():
 
 @fixture
 def model(key):
-    key_a, key_b = split(key, 2)
-    a = pn.Binary(key_a, 2)
-    b = pn.Binary(key_b, 3)
-    return (a, b)
+    return XOR(key)
 
 
 def test(model, x, y):
-    assert not array_equal(apply(model, x), y)
+    assert not array_equal(model(x), y)
     model = train(model, x, y)
-    assert array_equal(apply(model, x), y)
-
-
-def apply(model, x):
-    a, b = model
-    return b(pn.concat([x, a(x)]))
+    assert array_equal(model(x), y)
 
 
 def loss(model, x, y):
-    yhat = apply(model, x)
+    yhat = model(x)
     return mean(square(y - yhat))
 
 

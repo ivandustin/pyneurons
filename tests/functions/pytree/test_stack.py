@@ -1,4 +1,4 @@
-from pyneurons.functions.pytrees import stack
+from pyneurons.functions.pytree import stack
 from pyneurons.classes import Neuron
 
 

@@ -11,7 +11,7 @@ from .model import Model
 class Neuron(Model):
     @dispatch(type, tuple)
     def __new__(cls, value):
-        return super().__new__(cls, value)
+        return super(Model, cls).__new__(cls, value)
 
     @dispatch(type, ndarray, int)
     def __new__(cls, key, x):

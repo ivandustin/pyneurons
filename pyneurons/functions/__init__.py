@@ -1,15 +1,13 @@
 from .identity import identity
-from . import factories
-from . import pytrees
+from . import subclassing
+from . import pytree
 from . import random
-from . import core
 from . import vjps
 
 __all__ = [
-    "factories",
+    "subclassing",
     "identity",
-    "pytrees",
+    "pytree",
     "random",
-    "core",
     "vjps",
 ]
