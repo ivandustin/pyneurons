@@ -5,11 +5,10 @@ from pyneurons.classes.tuples.models import Neuron
 from pyneurons.functions.pytree import concat
 from pyneurons.functions.vjps import identity
 from pyneurons.functions.subclassing.pytree import compose
-from jax.numpy import array, mean, square, array_equal, heaviside, ndarray
-from jax.tree_util import tree_map, register_pytree_node_class
-from jax.lax import fori_loop
+from jax.numpy import array, array_equal, heaviside, ndarray
+from jax.tree_util import register_pytree_node_class
 from jax.random import split
-from jax import grad
+from .functions import train
 
 
 @identity
@@ -55,19 +54,5 @@ def model(key):
 
 def test(model, x, y):
     assert not array_equal(model(x), y)
-    model = train(model, x, y)
+    model = train(model, x, y, epochs=100)
     assert array_equal(model(x), y)
-
-
-def loss(model, x, y):
-    yhat = model(x)
-    return mean(square(y - yhat))
-
-
-def train(model, x, y):
-    def body(_, model):
-        gradient = grad(loss)(model, x, y)
-        model = tree_map(lambda w, g: w - 0.1 * g, model, gradient)
-        return model
-
-    return fori_loop(0, 100, body, model)
