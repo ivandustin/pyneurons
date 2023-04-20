@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from ..tuple import Tuple
+from pyneurons.classes import Tuple
 
 
 class Model(Tuple, ABC):
