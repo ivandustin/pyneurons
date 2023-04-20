@@ -1,5 +1,5 @@
 from pytest import fixture
-from pyneurons.classes import Neuron
+from pyneurons.classes.tuples.models import Neuron
 from jax.numpy import array, mean, square, isclose
 from jax.tree_util import tree_map
 from jax.lax import fori_loop

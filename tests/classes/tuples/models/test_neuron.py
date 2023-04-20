@@ -1,5 +1,5 @@
 from jax.tree_util import tree_map
-from pyneurons.classes import Neuron
+from pyneurons.classes.tuples.models import Neuron
 
 
 def test_with_key(key):

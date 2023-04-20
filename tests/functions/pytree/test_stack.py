@@ -1,5 +1,5 @@
+from pyneurons.classes.tuples.models import Neuron
 from pyneurons.functions.pytree import stack
-from pyneurons.classes import Neuron
 
 
 def test(key):

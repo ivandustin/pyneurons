@@ -1,8 +1,9 @@
 from pytest import fixture
 from multipledispatch import dispatch
-from pyneurons.classes import Model, Neuron
-from pyneurons.functions.vjps import identity
+from pyneurons.classes.tuples import Model
+from pyneurons.classes.tuples.models import Neuron
 from pyneurons.functions.pytree import concat
+from pyneurons.functions.vjps import identity
 from pyneurons.functions.subclassing.pytree import compose
 from jax.numpy import array, mean, square, array_equal, heaviside, ndarray
 from jax.tree_util import tree_map, register_pytree_node_class

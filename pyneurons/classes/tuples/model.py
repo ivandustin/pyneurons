@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .tuple import Tuple
+from ..tuple import Tuple
 
 
 class Model(Tuple, ABC):
