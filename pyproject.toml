@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pyneurons"
-version = "0.0.0"
-description = ""
+version = "0.1.0"
+description = "Composable neurons in JAX"
 authors = ["Ivan Dustin Bilon <ivan22.dust@gmail.com>"]
 license = "MIT"
 readme = "README.md"
