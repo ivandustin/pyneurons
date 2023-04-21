@@ -7,5 +7,5 @@ from .gd import gd
 
 @jit
 def fit(model, x, y, learning_rate=0.1):
-    gradient = grad(loss)(model, x, y)
-    return tree_map(partial(gd, learning_rate), model, gradient)
+    gradients = grad(loss)(model, x, y)
+    return tree_map(partial(gd, learning_rate), model, gradients)
