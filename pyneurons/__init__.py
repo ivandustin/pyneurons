@@ -25,8 +25,8 @@ Binary = compose("Binary", Neuron, binary)
 BReLU1 = compose("BReLU1", Neuron, brelu1)
 ReLU = compose("ReLU", Neuron, relu)
 ReLU1 = compose("ReLU1", Neuron, relu1)
-Spark = compose("Spark", Neuron, spark)
-Spike = compose("Spike", Neuron, spike)
+Spark = BReLU1
+Spike = Binary
 
 __all__ = [
     "random",
