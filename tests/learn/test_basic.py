@@ -21,6 +21,6 @@ def model(key):
 
 def test(model, x, y):
     assert not isclose(model(x), y)
-    for i in range(50):
+    for i in range(23):
         model = fit(model, x, y)
     assert isclose(model(x), y)
