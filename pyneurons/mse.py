@@ -1,6 +1,5 @@
 from jax.numpy import mean, square
 
 
-def loss(model, x, y):
-    yhat = model(x)
+def mse(y, yhat):
     return mean(square(y - yhat))

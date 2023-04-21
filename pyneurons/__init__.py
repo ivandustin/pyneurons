@@ -8,9 +8,13 @@ from .brelu1 import brelu1
 from .compose import compose
 from .concat import concat
 from .explode import explode
+from .fit import fit
+from .gd import gd
 from .identity import identity
 from .implode import implode
+from .loss import loss
 from .model import Model
+from .mse import mse
 from .neuron import neuron
 from .relu import relu
 from .relu1 import relu1
@@ -29,20 +33,30 @@ Spark = BReLU1
 Spike = Binary
 
 __all__ = [
-    "random",
-    "vjp",
+    "BReLU1",
+    "Binary",
+    "Box",
+    "Model",
+    "Neuron",
+    "ReLU",
+    "ReLU1",
+    "Spark",
+    "Spike",
     "apply",
     "binary",
     "bind",
-    "Box",
     "brelu1",
     "compose",
     "concat",
     "explode",
+    "fit",
+    "gd",
     "identity",
     "implode",
-    "Model",
+    "loss",
+    "mse",
     "neuron",
+    "random",
     "relu",
     "relu1",
     "spark",
@@ -50,11 +64,5 @@ __all__ = [
     "split",
     "stack",
     "unstack",
-    "Neuron",
-    "Binary",
-    "BReLU1",
-    "ReLU",
-    "ReLU1",
-    "Spark",
-    "Spike",
+    "vjp",
 ]

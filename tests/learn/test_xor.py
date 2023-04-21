@@ -3,8 +3,8 @@ from jax.numpy import array, array_equal
 from jax.random import split
 from pyneurons.concat import concat
 from pyneurons.bind import bind
+from pyneurons.fit import fit
 from pyneurons import Binary
-from .functions import train
 
 
 @fixture
@@ -29,7 +29,8 @@ def model(XOR, key):
 
 def test(model, x, y):
     assert not array_equal(model(x), y)
-    model = train(model, x, y, epochs=100)
+    for i in range(51):
+        model = fit(model, x, y)
     assert array_equal(model(x), y)
 
 
