@@ -11,7 +11,8 @@ class Box(tuple):
         register_pytree_node_class(cls)
 
     def tree_flatten(self):
-        return self, None
+        (x,) = self
+        return (x,), None
 
     @classmethod
     def tree_unflatten(cls, _, children):

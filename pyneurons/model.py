@@ -10,6 +10,11 @@ class Model(Box):
             pytree = cls.constructor(*args, **kwargs)
         return super().__new__(cls, pytree)
 
+    @classmethod
+    def tree_unflatten(cls, _, children):
+        (pytree,) = children
+        return cls(Box(pytree))
+
     def __call__(self, *args, **kwargs):
         (pytree,) = self
         return self.__class__.apply(pytree, *args, **kwargs)
