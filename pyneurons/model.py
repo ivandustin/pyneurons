@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
 from .box import Box
 
 
-class Model(Box):
+class Model(Box, ABC):
     def __new__(cls, *args, **kwargs):
         if len(args) == 1 and not kwargs and isinstance(args[0], Box):
             (box,) = args
@@ -19,8 +20,12 @@ class Model(Box):
         (pytree,) = self
         return self.__class__.apply(pytree, *args, **kwargs)
 
+    @staticmethod
+    @abstractmethod
     def constructor(*args, **kwargs):
         pass
 
+    @staticmethod
+    @abstractmethod
     def apply(*args, **kwargs):
         pass

@@ -1,8 +1,8 @@
 from jax.numpy import ndarray
 from multipledispatch import dispatch
+from .random.key import key as random_key
 from .random.weight import weight
 from .random.bias import bias
-from .random.key import key
 
 
 @dispatch(ndarray, int)
@@ -12,4 +12,4 @@ def neuron(key, n):
 
 @dispatch(int)
 def neuron(n):
-    return neuron(key(), n)
+    return neuron(random_key(), n)
