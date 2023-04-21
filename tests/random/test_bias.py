@@ -1,0 +1,12 @@
+from pytest import fixture
+from jax.numpy import isclose
+from pyneurons.random.bias import bias
+
+
+@fixture
+def instance(key):
+    return bias(key, shape=(1000,))
+
+
+def test_mean(instance):
+    assert isclose(instance.mean(), -1.618, atol=0.01)
