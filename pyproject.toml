@@ -9,7 +9,7 @@ repository = "https://github.com/ivandustin/pyneurons"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-jax = "0.4.28"
+jax = "^0.4.28"
 jaxlib = "^0.4.28"
 multipledispatch = "^0.6.0"
 
