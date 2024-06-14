@@ -1,6 +1,6 @@
-from .mse import mse
+from .mae import mae
 
 
 def loss(model, x, y):
     yhat = model(x)
-    return mse(y, yhat)
+    return mae(y, yhat)

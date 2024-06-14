@@ -1,7 +1,7 @@
 from pytest import fixture
-from pyneurons import Neuron
-from pyneurons.fit import fit
 from jax.numpy import array, isclose
+from pyneurons.fit import fit
+from pyneurons import Neuron
 
 
 @fixture
@@ -21,6 +21,7 @@ def model(key):
 
 def test(model, x, y):
     assert not isclose(model(x), y)
-    for i in range(23):
-        model = fit(model, x, y)
+    for learning_rate in [0.1, 0.01, 0.001]:
+        for _ in range(10):
+            model = fit(model, x, y, learning_rate)
     assert isclose(model(x), y)

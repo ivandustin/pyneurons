@@ -29,7 +29,7 @@ def model(XOR, key):
 
 def test(model, x, y):
     assert not array_equal(model(x), y)
-    for i in range(51):
+    for _ in range(100):
         model = fit(model, x, y)
     assert array_equal(model(x), y)
 

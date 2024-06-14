@@ -11,6 +11,7 @@ jobs:
         python-version: '3.9'
         cache: 'poetry'
     - run: poetry install
-    - run: poetry run pytest
+    - run: poetry run black --check .
     - run: poetry run flake8 .
-    - run: poetry run pylint pyneurons
+    - run: poetry run pylint --jobs 0 $(find . -name '*.py')
+    - run: poetry run pytest

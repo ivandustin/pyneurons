@@ -1,6 +1,9 @@
 [MESSAGES CONTROL]
 disable=
+    abstract-class-instantiated,
     too-many-function-args,
+    redefined-outer-name,
     function-redefined,
     missing-docstring,
+    redefined-builtin,
     invalid-name

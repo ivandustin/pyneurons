@@ -1,5 +1,6 @@
 from . import random
 from . import vjp
+from .abs import abs
 from .apply import apply
 from .binary import binary
 from .bind import bind
@@ -42,6 +43,7 @@ __all__ = [
     "ReLU1",
     "Spark",
     "Spike",
+    "abs",
     "apply",
     "binary",
     "bind",
