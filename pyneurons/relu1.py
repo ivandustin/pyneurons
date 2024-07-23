@@ -1,10 +1,3 @@
-from jax import jit
-from jax.numpy import minimum
-from .vjp.identity import identity
-from .relu import relu
+from .relun import relun
 
-
-@jit
-@identity
-def relu1(x):
-    return minimum(relu(x), 1)
+relu1 = relun(1)
