@@ -23,5 +23,5 @@ def test(model, x, y):
     assert not isclose(model(x), y)
     for learning_rate in [0.1, 0.01, 0.001]:
         for _ in range(10):
-            model = fit(model, x, y, learning_rate)
+            model = fit(learning_rate, model, x, y)
     assert isclose(model(x), y)

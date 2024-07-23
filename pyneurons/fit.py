@@ -5,6 +5,6 @@ from .loss import loss
 from .gd import gd
 
 
-def fit(model, x, y, learning_rate=0.1):
+def fit(learning_rate, model, x, y):
     gradients = grad(loss)(model, x, y)
     return tree_map(partial(gd, learning_rate), model, gradients)
