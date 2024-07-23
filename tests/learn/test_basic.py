@@ -1,7 +1,7 @@
 from pytest import fixture
 from jax.numpy import array, isclose
 from pyneurons.fit import fit
-from pyneurons import Bare
+from pyneurons import Neuron
 
 
 @fixture
@@ -16,7 +16,7 @@ def y():
 
 @fixture
 def model(key):
-    return Bare(key, 1)
+    return Neuron(key, 1)
 
 
 def test(model, x, y):

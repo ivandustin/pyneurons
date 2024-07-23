@@ -24,14 +24,13 @@ from .stack import stack
 from .unstack import unstack
 from .vector import vector
 
-Bare = bind("Bare", neuron, apply)
-Binary = compose("Binary", Bare, binary)
-Vector = compose("Vector", Bare, vector)
+Neuron = bind("Neuron", neuron, apply)
+Binary = compose("Binary", Neuron, binary)
+Vector = compose("Vector", Neuron, vector)
 
 __all__ = [
     "abs",
     "apply",
-    "Bare",
     "binary",
     "Binary",
     "bind",
@@ -47,6 +46,7 @@ __all__ = [
     "Model",
     "mse",
     "neuron",
+    "Neuron",
     "random",
     "relu",
     "relu1",
