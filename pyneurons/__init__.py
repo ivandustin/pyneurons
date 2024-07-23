@@ -30,8 +30,6 @@ Binary = compose("Binary", Neuron, binary)
 BReLU1 = compose("BReLU1", Neuron, brelu1)
 ReLU = compose("ReLU", Neuron, relu)
 ReLU1 = compose("ReLU1", Neuron, relu1)
-Spark = BReLU1
-Spike = Binary
 
 __all__ = [
     "BReLU1",
@@ -41,8 +39,6 @@ __all__ = [
     "Neuron",
     "ReLU",
     "ReLU1",
-    "Spark",
-    "Spike",
     "abs",
     "apply",
     "binary",
