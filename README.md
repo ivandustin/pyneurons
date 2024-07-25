@@ -112,39 +112,6 @@ input_data = np.array([[1, 2, 3]])
 output = model(input_data)  # Computes the output of the model
 ```
 
-### Putting It All Together
-
-Here is a complete example that demonstrates creating a neuron, applying it to input data, and binding it into a custom model:
-
-```python
-from pyneurons import create, apply, bind
-from jax.random import PRNGKey
-import jax.numpy as np
-
-# Create a JAX random key
-key = PRNGKey(0)
-
-# Create a neuron with 3 input dims
-neuron = create(key, 3)
-
-# Define input data
-input_data = np.array([[1, 2, 3]])
-
-# Apply the neuron to the input data
-output = apply(neuron, input_data)
-print("Neuron Output:", output)
-
-# Bind the neuron into a custom model
-CustomModel = bind("CustomModel", create, apply)
-
-# Create an instance of the custom model
-model = CustomModel(3)
-
-# Apply the model to the input data
-model_output = model(input_data)
-print("Model Output:", model_output)
-```
-
 ## Built-in Models
 
 ### Neuron
@@ -201,48 +168,54 @@ The `Vector` model in the `pyneurons` library is designed to mimic the behavior 
 
 ### Key Components
 
-1. **Binary Activation Function**:
-   - This function applies a step function (Heaviside function) to the input, outputting either 0 or 1. It mimics the all-or-nothing firing behavior of a neuron.
-   - **Code**:
-     ```python
-     from jax.numpy import heaviside
+#### Binary Activation Function
 
-     def binary(x):
-         return heaviside(x, 1)
-     ```
+This function applies a step function (Heaviside function) to the input, outputting either 0 or 1. It mimics the all-or-nothing firing behavior of a neuron.
 
-2. **ReLU1 Activation Function**:
-   - This function applies a ReLU activation capped at 1, ensuring the output is between 0 and 1. It mimics the varying firing rate of a neuron.
-   - **Code**:
-     ```python
-     from jax.numpy import minimum, maximum
+```python
+from jax.numpy import heaviside
 
-     def relu1(x):
-         return minimum(maximum(x, 0), 1)
-     ```
+def binary(x):
+    return heaviside(x, 1)
+```
 
-3. **Combining Binary and ReLU1**:
-   - The `Vector` model combines the binary and ReLU1 functions to produce an output that is either 0 or in the range of 1 to 2. This combination allows the model to represent both the firing state and the magnitude of the firing.
-   - **Code**:
-     ```python
-     from pyneurons import binary, relu1
+#### ReLU1 Activation Function
 
-     def vector(x):
-         return binary(x) + relu1(x)
-     ```
+This function applies a ReLU activation capped at 1, ensuring the output is between 0 and 1. It mimics the varying firing rate of a neuron.
+
+```python
+from jax.numpy import minimum, maximum
+
+def relu1(x):
+    return minimum(maximum(x, 0), 1)
+```
+
+#### Combining Binary and ReLU1
+
+The `Vector` model combines the binary and ReLU1 functions to produce an output that is either 0 or in the range of 1 to 2. This combination allows the model to represent both the firing state and the magnitude of the firing.
+
+```python
+from pyneurons import binary, relu1
+
+def vector(x):
+    return binary(x) + relu1(x)
+```
 
 ### Mimicking Real Neurons
 
 The `Vector` model mimics real neurons in the following ways:
 
-1. **Firing or Not Firing**:
-   - The binary function outputs 0 or 1, representing whether the neuron is firing or not. This is similar to the all-or-nothing principle of biological neurons.
+1. **Firing or Not Firing**
 
-2. **Firing Rate**:
-   - The function outputs a value between 1 and 2, representing the neuron's firing rate.
+    The binary function outputs 0 or 1, representing whether the neuron is firing or not. This is similar to the all-or-nothing principle of biological neurons.
 
-3. **Group of Neurons Firing Together**:
-   - It can also represent the magnitude of the collective firing of a group of neurons.
+2. **Firing Rate**
+
+    The function outputs a value between 1 and 2, representing the neuron's firing rate.
+
+3. **Group of Neurons Firing Together**
+
+    It can also represent the magnitude of the collective firing of a group of neurons.
 
 ## The `fit` Function
 
@@ -307,14 +280,17 @@ The XOR problem is a classic problem in neural networks where the goal is to tra
 
 ### Step-by-Step Solution
 
-1. **Define the XOR Model**:
-   - The XOR model consists of two binary neurons. The first neuron takes the input and the second neuron takes the concatenation of the input and the output of the first neuron.
+1. **Define the XOR Model**
 
-2. **Create the XOR Model**:
-   - Use the `bind` function to create the XOR model by specifying the constructor and apply functions.
+    The XOR model consists of two binary neurons. The first neuron takes the input and the second neuron takes the concatenation of the input and the output of the first neuron.
 
-3. **Train the Model**:
-   - Use the `fit` function to train the model on the XOR dataset.
+2. **Create the XOR Model**
+
+    Use the `bind` function to create the XOR model by specifying the constructor and apply functions.
+
+3. **Train the Model**
+
+    Use the `fit` function to train the model on the XOR dataset.
 
 Here is the complete code to solve the XOR problem:
 
@@ -460,7 +436,7 @@ from jax.numpy import abs as function
 abs = sign(function)
 ```
 
-This is used in `pyneurons` for the `mae` loss function.
+This is used for the `mae` loss function.
 
 ## Loss Function: MAE
 
