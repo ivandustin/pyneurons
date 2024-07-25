@@ -7,6 +7,7 @@ from .bind import bind
 from .box import Box
 from .compose import compose
 from .concat import concat
+from .create import create
 from .explode import explode
 from .fit import fit
 from .gd import gd
@@ -15,7 +16,6 @@ from .implode import implode
 from .loss import loss
 from .model import Model
 from .mse import mse
-from .neuron import neuron
 from .relu import relu
 from .relu1 import relu1
 from .relun import relun
@@ -24,7 +24,7 @@ from .stack import stack
 from .unstack import unstack
 from .vector import vector
 
-Neuron = bind("Neuron", neuron, apply)
+Neuron = bind("Neuron", create, apply)
 Binary = compose("Binary", Neuron, binary)
 Vector = compose("Vector", Neuron, vector)
 
@@ -37,6 +37,7 @@ __all__ = [
     "Box",
     "compose",
     "concat",
+    "create",
     "explode",
     "fit",
     "gd",
@@ -45,7 +46,6 @@ __all__ = [
     "loss",
     "Model",
     "mse",
-    "neuron",
     "Neuron",
     "random",
     "relu",
