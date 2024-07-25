@@ -40,7 +40,8 @@ from pyneurons import create
 
 The `create` function initializes the weights and biases for a neuron. It can be called with a random key and the number of neurons or just the number of neurons, in which case it generates a random key internally.
 
-**Sample Usage:**
+#### Example
+
 ```python
 from pyneurons import create
 from jax.random import PRNGKey
@@ -64,7 +65,7 @@ def apply(neuron, x):
     return (x @ w) + b
 ```
 
-**Sample Usage:**
+#### Example
 
 ```python
 from pyneurons import apply
@@ -83,7 +84,7 @@ from pyneurons import bind
 
 The `bind` function creates a new model class by binding a constructor and an apply function. It can be used to create custom neural network models.
 
-**Sample Usage:**
+#### Example
 
 ```python
 from pyneurons import bind
@@ -110,6 +111,34 @@ model = CustomModel(key, 3)  # Creates a model with 3 input dims
 # Apply the model to some input data
 input_data = np.array([[1, 2, 3]])
 output = model(input_data)  # Computes the output of the model
+```
+
+### The `compose` Function
+
+```python
+from pyneurons import compose
+```
+
+The `compose` function in the `pyneurons` library is used to create a new model class by composing an existing model class with an additional function. This allows for the creation of more complex models by combining simpler ones.
+
+#### Example
+
+```python
+from pyneurons import Neuron, compose, binary
+from jax.random import PRNGKey
+import jax.numpy as np
+
+# Define a binary neuron model by composing the Neuron model with the binary function
+Binary = compose("Binary", Neuron, binary)
+
+# Create an instance of the Binary model
+key = PRNGKey(0)
+binary_neuron = Binary(key, 3)
+
+# Apply the binary neuron model to some input data
+input_data = np.array([[1, 2, 3]])
+output = binary_neuron(input_data)
+print(output)
 ```
 
 ## Built-in Models
