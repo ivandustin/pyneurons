@@ -19,7 +19,7 @@ def y():
 
 @fixture
 def XOR():
-    return bind("XOR", constructor, apply)
+    return bind("XOR", create, apply)
 
 
 @fixture
@@ -34,7 +34,7 @@ def test(model, x, y):
     assert array_equal(model(x), y)
 
 
-def constructor(key):
+def create(key):
     key_a, key_b = split(key, 2)
     a = Binary(key_a, 2)
     b = Binary(key_b, 3)
