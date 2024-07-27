@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import isclose
-from pyneurons.random.bias import bias
+from pyneurons import bias
 
 
 @fixture

@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import isclose
-from pyneurons.random.weight import weight
+from pyneurons import weight
 
 
 @fixture

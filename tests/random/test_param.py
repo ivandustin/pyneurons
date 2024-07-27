@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import float32, isclose
-from pyneurons.random.param import param
+from pyneurons import param
 
 
 @fixture
