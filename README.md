@@ -14,7 +14,7 @@ _Let us give thanks to the LORD for He is good, His love endures forever. Let us
 
 # pyneurons
 
-Build composable neural networks.
+An artificial neural network library designed to help you build complex networks by composing simpler ones together.
 
 ## Built on Top of JAX
 
@@ -30,34 +30,49 @@ pip install pyneurons
 
 This will download and install the package along with its dependencies.
 
-## Basics
-
-### The `create` Function
+## The `create` Function
 
 ```python
 from pyneurons import create
 ```
 
-The `create` function initializes the weights and biases for a neuron. It can be called with a random key and the number of neurons or just the number of neurons, in which case it generates a random key internally.
+The `create` function creates a tuple with weights and bias, representing a single neuron.
 
-#### Example
+### Definition
+
+```python
+from pyneurons import weight, bias
+
+def create(key, n):
+    w = weight(key, shape=(n, 1))
+    b = bias(key, shape=(1, 1))
+    return (w, b)
+```
+
+The `weight` and `bias` functions are custom functions designed to initialize random arrays using a normal distribution with custom mean and standard deviation.
+
+### Example
 
 ```python
 from pyneurons import create
 from jax.random import PRNGKey
 
-key = PRNGKey(0)  # Create a JAX random key
-neuron = create(key, 3)  # Creates a neuron with 3 inputs
+key = PRNGKey(0)
+neuron = create(key, 3)  # Create a neuron with 3 input dim
 weights, bias = neuron  # Extract the weights and bias
+print(weights)
+print(bias)
 ```
 
-### The `apply` Function
+## The `apply` Function
 
 ```python
 from pyneurons import apply
 ```
 
-The `apply` function computes the output of a neuron given its weights, biases, and input data.
+The `apply` function computes the output of a neuron given its weights, biases, and input.
+
+### Definition
 
 ```python
 def apply(neuron, x):
@@ -65,68 +80,64 @@ def apply(neuron, x):
     return (x @ w) + b
 ```
 
-#### Example
+### Example
 
 ```python
-from pyneurons import apply
-import jax.numpy as np
-
-neuron = (np.array([[0.5], [0.5], [0.5]]), np.array([[0.1]]))
-input_data = np.array([[1, 2, 3]])
-output = apply(neuron, input_data)  # Computes the output of the neuron
-```
-
-### The `bind` Function
-
-```python
-from pyneurons import bind
-```
-
-The `bind` function creates a new model class by binding a constructor and an apply function. It can be used to create custom neural network models.
-
-#### Example
-
-```python
-from pyneurons import bind
+from pyneurons import create, apply
 from jax.random import PRNGKey
-import jax.numpy as np
+from jax.numpy import array
 
-def create(key, input_dim):
-    """Create a custom model. Return a JAX pytree."""
-    ...
-
-def apply(model, x):
-    """Apply x to the custom model."""
-    ...
-
-# Define a custom model
-CustomModel = bind("CustomModel", create, apply)
-
-# Create a JAX random key
 key = PRNGKey(0)
-
-# Create an instance of the custom model
-model = CustomModel(key, 3)  # Creates a model with 3 input dims
-
-# Apply the model to some input data
-input_data = np.array([[1, 2, 3]])
-output = model(input_data)  # Computes the output of the model
+neuron = create(key, 3)
+x = array([[1, 2, 3]])
+y = apply(neuron, x)
+print(y)
 ```
 
-### The `compose` Function
+## The `bind` Function
+
+```python
+from pyneurons import bind
+```
+
+The `bind` function creates a new model class by binding a `create` and an `apply` function. It can be used to create custom neural network models.
+
+### Example
+
+```python
+from pyneurons import create, apply, bind
+from jax.random import PRNGKey
+from jax.numpy import array
+
+# Define a model class
+Neuron = bind("Neuron", create, apply)
+
+# Instantiate the model
+key = PRNGKey(0)
+neuron = Neuron(key, 3)  # Calls the create function internally
+
+# Apply some input
+x = array([[1, 2, 3]])
+y = neuron(x)  # Calls the apply function internally
+print(y)
+```
+
+You can provide your own custom `create` and `apply` functions and design your own custom model class. Within your `create` function, you can instantiate simpler models to construct more complex models from these basic components.
+
+## The `compose` Function
 
 ```python
 from pyneurons import compose
 ```
 
-The `compose` function in the `pyneurons` library is used to create a new model class by composing an existing model class with an additional function. This allows for the creation of more complex models by combining simpler ones.
+The `compose` function is used to create a new model class by composing an existing model class with an additional function.
 
-#### Example
+### Example
 
 ```python
 from pyneurons import Neuron, compose, binary
 from jax.random import PRNGKey
-import jax.numpy as np
+from jax.numpy import array
 
 # Define a binary neuron model by composing the Neuron model with the binary function
 Binary = compose("Binary", Neuron, binary)
@@ -136,7 +147,7 @@ key = PRNGKey(0)
 binary_neuron = Binary(key, 3)
 
 # Apply the binary neuron model to some input data
-input_data = np.array([[1, 2, 3]])
+input_data = array([[1, 2, 3]])
 output = binary_neuron(input_data)
 print(output)
 ```
@@ -150,6 +161,8 @@ from pyneurons import Neuron
 ```
 
 The basic neuron model created by binding the `create` and `apply` functions.
+
+### Definition
 
 ```python
 from pyneurons import create, apply
@@ -165,13 +178,19 @@ from pyneurons import Binary
 
 A neuron model with a binary activation function.
 
+### Definition
+
+```python
+from pyneurons import Neuron, compose, binary
+
+Binary = compose("Binary", Neuron, binary)
+```
+
 ```python
 from jax.numpy import heaviside
 
 def binary(x):
     return heaviside(x, 1)
-
-Binary = compose("Binary", Neuron, binary)
 ```
 
 ### Vector
@@ -182,18 +201,24 @@ from pyneurons import Vector
 
 A neuron model with a combined binary and ReLU1 activation function.
 
+### Definition
+
+```python
+from pyneurons import Neuron, compose, vector
+
+Vector = compose("Vector", Neuron, vector)
+```
+
 ```python
 from pyneurons import binary, relu1
 
 def vector(x):
     return binary(x) + relu1(x)
-
-Vector = compose("Vector", Neuron, vector)
 ```
 
 ## The Vector Model
 
-The `Vector` model in the `pyneurons` library is designed to mimic the behavior of real neurons in a simplified manner. It combines two activation functions: a binary step function and a capped ReLU (Rectified Linear Unit) function. This combination allows the model to produce outputs that can either be 0 or in the range of 1 to 2, which can be interpreted as the neuron firing rate or a group of neurons firing together.
+The `Vector` model is designed to mimic the behavior of real neurons in a simplified manner. It combines two activation functions: a binary step function and a capped ReLU (Rectified Linear Unit) function. This combination allows the model to produce outputs that can either be 0 or in the range of 1 to 2, which can be interpreted as the neuron firing rate or a group of neurons firing together.
 
 ### Key Components
 
@@ -252,7 +277,7 @@ The `Vector` model mimics real neurons in the following ways:
 from pyneurons import fit
 ```
 
-The `fit` function in the `pyneurons` library is used for training a model. It performs a single step of gradient descent to update the model's parameters based on the computed gradients. The function takes the following parameters:
+The `fit` function is used for training a model. It performs a single step of gradient descent to update the model's parameters based on the computed gradients. The function takes the following parameters:
 
 - `learning_rate`: The learning rate for the gradient descent optimization.
 - `model`: The model to be trained.
@@ -281,11 +306,11 @@ Below is an example of how to use the `pyneurons` library to create a simple neu
 ```python
 from pyneurons import Neuron, fit
 from jax.random import PRNGKey
-import jax.numpy as jnp
+from jax.numpy import array
 
 # Define the input data and target data
-x = jnp.array([[1.0], [2.0], [3.0], [4.0]])
-y = jnp.array([[2.0], [4.0], [6.0], [8.0]])
+x = array([[1.0], [2.0], [3.0], [4.0]])
+y = array([[2.0], [4.0], [6.0], [8.0]])
 
 # Create a model (a single neuron in this case)
 key = PRNGKey(0)
@@ -324,7 +349,7 @@ The XOR problem is a classic problem in neural networks where the goal is to tra
 Here is the complete code to solve the XOR problem:
 
 ```python
-from pyneurons import Binary, fit, bind, create, apply, concat
+from pyneurons import Binary, fit, bind, concat
 from jax.numpy import array, array_equal
 from jax.random import split, PRNGKey
 
