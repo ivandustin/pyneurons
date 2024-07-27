@@ -162,7 +162,7 @@ from pyneurons import Neuron
 
 The basic neuron model created by binding the `create` and `apply` functions.
 
-### Definition
+#### Definition
 
 ```python
 from pyneurons import create, apply
@@ -178,7 +178,7 @@ from pyneurons import Binary
 
 A neuron model with a binary activation function.
 
-### Definition
+#### Definition
 
 ```python
 from pyneurons import Neuron, compose, binary
@@ -201,7 +201,7 @@ from pyneurons import Vector
 
 A neuron model with a combined binary and ReLU1 activation function.
 
-### Definition
+#### Definition
 
 ```python
 from pyneurons import Neuron, compose, vector
@@ -238,10 +238,30 @@ def binary(x):
 This function applies a ReLU activation capped at 1, ensuring the output is between 0 and 1. It mimics the varying firing rate of a neuron.
 
 ```python
-from jax.numpy import minimum, maximum
+from pyneurons import relun
 
-def relu1(x):
-    return minimum(maximum(x, 0), 1)
+relu1 = relun(1)
+```
+
+```python
+from pyneurons import relu
+from pyneurons.vjp import identity
+from jax.numpy import minimum
+
+def relun(n):
+    @identity
+    def function(x):
+        return minimum(relu(x), n)
+    return function
+```
+
+```python
+from pyneurons.vjp import identity
+from jax.numpy import maximum
+
+@identity
+def relu(x):
+    return maximum(x, 0)
 ```
 
 #### Combining Binary and ReLU1
