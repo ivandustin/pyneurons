@@ -120,6 +120,23 @@ print(y)
 
 You can provide your own custom `create` and `apply` functions and design your own custom model class. Within your `create` function, you can instantiate simpler models to construct more complex models from these basic components.
 
+You can also extract the output of the `create` function from inside the model like this:
+
+```python
+pytree, = neuron
+print(pytree)
+```
+
+Since we used the built-in `create` function, we can extract the weights and bias from the extracted pytree.
+
+```python
+weights, bias = pytree
+print(weights)
+print(bias)
+```
+
+Note that the model itself is also a pytree.
+
 ## The `compose` Function
 
 ```python
@@ -147,6 +164,58 @@ input_data = array([[1, 2, 3]])
 output = binary_neuron(input_data)
 print(output)
 ```
+
+## The `concat` Function
+
+```python
+from pyneurons import concat
+```
+
+The `concat` function is used to concatenate multiple pytrees along the last axis.
+
+It can be used to concatenate multiple neurons together and form a network layer.
+
+```python
+from pyneurons import Neuron, concat
+from jax.random import PRNGKey, split
+from jax.numpy import array
+
+key = PRNGKey(0)
+
+# Create a neuron with 3 input and 10 output dims
+neuron = concat([Neuron(key, 3) for key in split(key, 10)])
+
+x = array([[1, 2, 3]])
+y = neuron(x)
+print(y)
+```
+
+## The `stack` Function
+
+```python
+from pyneurons import stack
+```
+
+The `stack` function is used to combine multiple pytrees along a new axis.
+
+It can be used to stack multiple neurons.
+
+```python
+from pyneurons import Neuron, stack
+from jax.random import PRNGKey, split
+from jax.numpy import array
+
+key = PRNGKey(0)
+
+# Stack 10 neurons that accept 3 input dim
+neuron = stack([Neuron(key, 3) for key in split(key, 10)])
+
+x = array([[1, 2, 3]])
+y = neuron(x)
+print(y)
+```
+
+You can also stack multiple instances of a complex model (with the same architecture but with different weights) that accepts the same set of input.
 
 ## Built-in Models
 
