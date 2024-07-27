@@ -1,6 +1,6 @@
 from pytest import fixture
 from jax.numpy import isclose
-from pyneurons import bias
+from pyneurons import PHI, bias
 
 
 @fixture
@@ -9,4 +9,4 @@ def instance(key):
 
 
 def test_mean(instance):
-    assert isclose(instance.mean(), -1.618, atol=0.01)
+    assert isclose(instance.mean(), -PHI, atol=0.001)
