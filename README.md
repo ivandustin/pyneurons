@@ -38,8 +38,6 @@ from pyneurons import create
 
 The `create` function creates a tuple with weights and bias, representing a single neuron.
 
-### Definition
-
 ```python
 from pyneurons import weight, bias
 
@@ -71,8 +69,6 @@ from pyneurons import apply
 ```
 
 The `apply` function computes the output of a neuron given its weights, biases, and input.
-
-### Definition
 
 ```python
 def apply(neuron, x):
@@ -162,8 +158,6 @@ from pyneurons import Neuron
 
 The basic neuron model created by binding the `create` and `apply` functions.
 
-#### Definition
-
 ```python
 from pyneurons import create, apply
 
@@ -177,8 +171,6 @@ from pyneurons import Binary
 ```
 
 A neuron model with a binary activation function.
-
-#### Definition
 
 ```python
 from pyneurons import Neuron, compose, binary
@@ -200,8 +192,6 @@ from pyneurons import Vector
 ```
 
 A neuron model with a combined binary and ReLU1 activation function.
-
-#### Definition
 
 ```python
 from pyneurons import Neuron, compose, vector
