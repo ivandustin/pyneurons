@@ -15,6 +15,7 @@ from .identity import identity
 from .implode import implode
 from .loss import loss
 from .model import Model
+from .mae import mae
 from .mse import mse
 from .param import param
 from .phi import PHI
@@ -49,6 +50,7 @@ __all__ = [
     "implode",
     "loss",
     "Model",
+    "mae",
     "mse",
     "Neuron",
     "param",
